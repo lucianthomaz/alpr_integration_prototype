@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: '20230827-1800'
+      author: lucianthomaz
+      comment: "Create Database"
+      changes:
+        - sqlFile:
+            path: 001-tables-creation.sql
+            relativeToChangelogFile: true
