@@ -1,4 +1,4 @@
-package com.lucianthomaz.alpr.alprintegration;
+package com.lucianthomaz.alpr.alprintegration.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

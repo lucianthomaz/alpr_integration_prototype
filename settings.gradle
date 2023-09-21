@@ -1,4 +1,8 @@
 rootProject.name = 'alprintegration'
 include 'application'
 include 'controller'
+include 'usecase'
+include 'domain'
+include 'persistence'
+include 'interactor'
 
