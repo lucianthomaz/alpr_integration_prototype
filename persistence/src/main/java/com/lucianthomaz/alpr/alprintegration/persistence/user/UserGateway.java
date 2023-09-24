@@ -13,19 +13,13 @@ public class UserGateway implements UserRepository {
 
     @Override
     public User create(User user) {
-        PersistentUser persistentUser = PersistentUser.builder()
-                .email("lucian@email.com")
-                .nome("Lucian")
-                .senha("senha")
-                .usuario("lucian")
-                .build();
-        userJpaRepository.save(persistentUser);
-        return User.builder().build();
+        PersistentUser persistentUser = objectMapper.convertValue(user, PersistentUser.class);
+        return objectMapper.convertValue(userJpaRepository.save(persistentUser), User.class);
     }
 
     @Override
     public User getUser(int id) {
         PersistentUser persistentUser = userJpaRepository.getReferenceById(id);
-        return User.builder().build();
+        return objectMapper.convertValue(persistentUser, User.class);
     }
 }

@@ -1,4 +1,9 @@
 package com.lucianthomaz.alpr.alprintegration.usecase.usercreation;
 
-public record UserCreationRequest(String nome, String email, String usuario, String senha) {
+import jakarta.validation.constraints.NotNull;
+
+public record UserCreationRequest(@NotNull String name,
+                                  @NotNull String email,
+                                  @NotNull String username,
+                                  @NotNull String password) {
 }
