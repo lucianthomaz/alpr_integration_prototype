@@ -1,8 +1,8 @@
 package com.lucianthomaz.alpr.alprintegration.persistence.user;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lucianthomaz.alpr.alprintegration.User;
-import com.lucianthomaz.alpr.alprintegration.repositoryInterface.UserRepository;
+import com.lucianthomaz.alpr.alprintegration.domain.User;
+import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.UserRepository;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
