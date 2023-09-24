@@ -1,4 +1,4 @@
-package com.lucianthomaz.alpr.alprintegration;
+package com.lucianthomaz.alpr.alprintegration.domain;
 
 public enum StatusEnum {
     CREATED,

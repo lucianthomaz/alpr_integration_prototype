@@ -1,0 +1,4 @@
+package com.lucianthomaz.alpr.alprintegration.usecase.statistics.visualizehighestalertnumbersbyaddress;
+
+public interface VisualizeHighestAlertNumbersByAddressUseCase {
+}
