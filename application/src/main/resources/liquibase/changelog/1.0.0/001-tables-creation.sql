@@ -1,4 +1,4 @@
-CREATE TABLE `Veiculo`
+CREATE TABLE `vehicle`
 (
     `placa`  varchar(08),
     `modelo` varchar(100),
@@ -6,24 +6,24 @@ CREATE TABLE `Veiculo`
     PRIMARY KEY (`placa`)
 );
 
-CREATE TABLE `Status`
+CREATE TABLE `status`
 (
-    `id`     int,
+    `id`     int NOT NULL AUTO_INCREMENT,
     `status` varchar(50),
     PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Tipo_alerta`
+CREATE TABLE `alert_type`
 (
-    `id`        int,
+    `id`        int NOT NULL AUTO_INCREMENT,
     `nome`      varchar(20),
     `descricao` varchar(100),
     PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Local`
+CREATE TABLE `location`
 (
-    `id`        int,
+    `id`        int NOT NULL AUTO_INCREMENT,
     `endereco`  varchar(100),
     `latitude`  Decimal(8, 6),
     `longitude` Decimal(9, 6),
@@ -31,9 +31,9 @@ CREATE TABLE `Local`
     PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Usuario`
+CREATE TABLE `user`
 (
-    `id`      int,
+    `id`      int NOT NULL AUTO_INCREMENT,
     `nome`    varchar(100),
     `email`   varchar(100),
     `usuario` varchar(100),
@@ -41,9 +41,9 @@ CREATE TABLE `Usuario`
     PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Alerta`
+CREATE TABLE `alert`
 (
-    `id`             int,
+    `id`             int NOT NULL AUTO_INCREMENT,
     `local_id`       int,
     `placa`          varchar(08),
     `tipo_alerta_id` varchar(08),
@@ -54,9 +54,9 @@ CREATE TABLE `Alerta`
     PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `alerta_usuario`
+CREATE TABLE `user_alert`
 (
-    `id`         int,
+    `id`         int NOT NULL AUTO_INCREMENT,
     `alerta_id`  int,
     `usuario_id` int,
     `Aceite`     tinyint,
