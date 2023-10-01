@@ -1,4 +1,4 @@
-package com.lucianthomaz.alpr.alprintegration.usecase.usercreation;
+package com.lucianthomaz.alpr.alprintegration.usecase.user.create;
 
 import jakarta.validation.constraints.NotNull;
 

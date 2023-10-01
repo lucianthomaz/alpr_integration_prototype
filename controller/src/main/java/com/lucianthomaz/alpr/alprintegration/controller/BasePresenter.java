@@ -1,7 +1,6 @@
 package com.lucianthomaz.alpr.alprintegration.controller;
 
 import com.lucianthomaz.alpr.alprintegration.usecase.concept.BaseResponder;
-import com.lucianthomaz.alpr.alprintegration.usecase.usercreation.UserCreationResponder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

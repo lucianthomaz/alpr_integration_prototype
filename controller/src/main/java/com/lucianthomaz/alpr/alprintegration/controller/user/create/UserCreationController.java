@@ -1,8 +1,8 @@
 package com.lucianthomaz.alpr.alprintegration.controller.user.create;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lucianthomaz.alpr.alprintegration.usecase.usercreation.UserCreationRequest;
-import com.lucianthomaz.alpr.alprintegration.usecase.usercreation.UserCreationUseCase;
+import com.lucianthomaz.alpr.alprintegration.usecase.user.create.UserCreationRequest;
+import com.lucianthomaz.alpr.alprintegration.usecase.user.create.UserCreationUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

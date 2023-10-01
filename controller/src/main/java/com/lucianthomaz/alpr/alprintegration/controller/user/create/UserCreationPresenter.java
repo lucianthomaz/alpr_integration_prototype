@@ -2,8 +2,8 @@ package com.lucianthomaz.alpr.alprintegration.controller.user.create;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lucianthomaz.alpr.alprintegration.controller.BasePresenter;
-import com.lucianthomaz.alpr.alprintegration.usecase.usercreation.UserCreationResponder;
-import com.lucianthomaz.alpr.alprintegration.usecase.usercreation.UserCreationResponse;
+import com.lucianthomaz.alpr.alprintegration.usecase.user.create.UserCreationResponder;
+import com.lucianthomaz.alpr.alprintegration.usecase.user.create.UserCreationResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
