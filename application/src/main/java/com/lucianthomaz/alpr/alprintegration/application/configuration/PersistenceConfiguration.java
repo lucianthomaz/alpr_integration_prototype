@@ -1,9 +1,15 @@
 package com.lucianthomaz.alpr.alprintegration.application.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.AlertTypeRepository;
+import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.VehicleRepository;
+import com.lucianthomaz.alpr.alprintegration.persistence.alerttype.AlertTypeGateway;
+import com.lucianthomaz.alpr.alprintegration.persistence.alerttype.AlertTypeJpaRepository;
 import com.lucianthomaz.alpr.alprintegration.persistence.user.UserGateway;
 import com.lucianthomaz.alpr.alprintegration.persistence.user.UserJpaRepository;
 import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.UserRepository;
+import com.lucianthomaz.alpr.alprintegration.persistence.vehicle.VehicleGateway;
+import com.lucianthomaz.alpr.alprintegration.persistence.vehicle.VehicleJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
@@ -19,5 +25,17 @@ public class PersistenceConfiguration {
     @Autowired
     public UserRepository userRepository(UserJpaRepository userJpaRepository, ObjectMapper objectMapper) {
         return new UserGateway(userJpaRepository, objectMapper);
+    }
+
+    @Bean
+    @Autowired
+    public AlertTypeRepository alertTypeRepository(AlertTypeJpaRepository alertTypeJpaRepository, ObjectMapper objectMapper) {
+        return new AlertTypeGateway(alertTypeJpaRepository, objectMapper);
+    }
+
+    @Bean
+    @Autowired
+    public VehicleRepository vehicleRepository(VehicleJpaRepository jpaRepository, ObjectMapper objectMapper) {
+        return new VehicleGateway(jpaRepository, objectMapper);
     }
 }

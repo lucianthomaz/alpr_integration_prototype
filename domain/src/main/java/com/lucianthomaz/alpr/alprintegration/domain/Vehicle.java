@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class Vehicle {
-    private String licensePlate;
+    private String license_plate;
     private String model;
     private String color;
 }
