@@ -1,10 +1,12 @@
 package com.lucianthomaz.alpr.alprintegration.application.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lucianthomaz.alpr.alprintegration.controller.alert.create.AlertCreationController;
 import com.lucianthomaz.alpr.alprintegration.controller.alerttype.create.AlertTypeCreationController;
 import com.lucianthomaz.alpr.alprintegration.controller.location.create.LocationCreationController;
 import com.lucianthomaz.alpr.alprintegration.controller.user.create.UserCreationController;
 import com.lucianthomaz.alpr.alprintegration.controller.vehicle.create.VehicleCreationController;
+import com.lucianthomaz.alpr.alprintegration.usecase.alert.create.AlertCreationUseCase;
 import com.lucianthomaz.alpr.alprintegration.usecase.alerttype.create.AlertTypeCreationUseCase;
 import com.lucianthomaz.alpr.alprintegration.usecase.location.create.LocationCreationUseCase;
 import com.lucianthomaz.alpr.alprintegration.usecase.user.create.UserCreationUseCase;
@@ -37,5 +39,11 @@ public class ControllerConfiguration {
     @Autowired
     LocationCreationController locationCreationController(LocationCreationUseCase useCase, ObjectMapper objectMapper) {
         return new LocationCreationController(useCase, objectMapper);
+    }
+
+    @Bean
+    @Autowired
+    AlertCreationController alertCreationController(AlertCreationUseCase useCase, ObjectMapper objectMapper) {
+        return new AlertCreationController(useCase, objectMapper);
     }
 }

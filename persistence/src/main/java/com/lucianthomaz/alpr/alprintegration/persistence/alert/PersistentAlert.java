@@ -1,18 +1,23 @@
-package com.lucianthomaz.alpr.alprintegration.domain;
+package com.lucianthomaz.alpr.alprintegration.persistence.alert;
 
+import com.lucianthomaz.alpr.alprintegration.domain.StatusEnum;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
+@Table(name = "alert")
 @Data
 @Builder
-public class Alert {
+@AllArgsConstructor
+@NoArgsConstructor
+public class PersistentAlert {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int locationId;
     private String licensePlate;
@@ -21,5 +26,4 @@ public class Alert {
     private String details;
     private StatusEnum status;
     private String pictureUrl;
-    private Set<User> usersNotified;
 }

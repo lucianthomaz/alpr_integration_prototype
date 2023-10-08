@@ -5,7 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -16,5 +17,5 @@ public class User {
     private String email;
     private String username;
     private String password;
-    private List<Alert> alertsNotification;
+    private Set<Alert> alertsNotification;
 }
