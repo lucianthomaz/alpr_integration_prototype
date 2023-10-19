@@ -10,6 +10,8 @@ import com.lucianthomaz.alpr.alprintegration.persistence.location.LocationGatewa
 import com.lucianthomaz.alpr.alprintegration.persistence.location.LocationJpaRepository;
 import com.lucianthomaz.alpr.alprintegration.persistence.user.UserGateway;
 import com.lucianthomaz.alpr.alprintegration.persistence.user.UserJpaRepository;
+import com.lucianthomaz.alpr.alprintegration.persistence.useralert.UserAlertGateway;
+import com.lucianthomaz.alpr.alprintegration.persistence.useralert.UserAlertJpaRepository;
 import com.lucianthomaz.alpr.alprintegration.persistence.vehicle.VehicleGateway;
 import com.lucianthomaz.alpr.alprintegration.persistence.vehicle.VehicleJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +47,12 @@ public class PersistenceConfiguration {
     @Autowired
     public LocationRepository locationRepository(LocationJpaRepository jpaRepository, ObjectMapper objectMapper) {
         return new LocationGateway(jpaRepository, objectMapper);
+    }
+
+    @Bean
+    @Autowired
+    public UserAlertRepository userAlertRepository(UserAlertJpaRepository jpaRepository, ObjectMapper objectMapper) {
+        return new UserAlertGateway(jpaRepository, objectMapper);
     }
 
     @Bean

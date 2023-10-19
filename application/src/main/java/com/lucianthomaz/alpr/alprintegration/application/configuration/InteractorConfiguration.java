@@ -3,11 +3,13 @@ package com.lucianthomaz.alpr.alprintegration.application.configuration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.*;
 import com.lucianthomaz.alpr.alprintegration.interactor.alert.AlertCreationInteractor;
+import com.lucianthomaz.alpr.alprintegration.interactor.alert.SendToUserInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.alerttype.AlertTypeCreationInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.location.LocationCreationInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.user.UserCreationInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.vehicle.VehicleCreationInteractor;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.create.AlertCreationUseCase;
+import com.lucianthomaz.alpr.alprintegration.usecase.alert.sendtouser.SendToUserUseCase;
 import com.lucianthomaz.alpr.alprintegration.usecase.alerttype.create.AlertTypeCreationUseCase;
 import com.lucianthomaz.alpr.alprintegration.usecase.location.create.LocationCreationUseCase;
 import com.lucianthomaz.alpr.alprintegration.usecase.user.create.UserCreationUseCase;
@@ -45,8 +47,14 @@ public class InteractorConfiguration {
 
     @Bean
     @Autowired
-    AlertCreationUseCase alertCreationUseCase(AlertRepository alertRepository, ObjectMapper objectMapper) {
-        return new AlertCreationInteractor(alertRepository, objectMapper);
+    SendToUserUseCase sendToUserUseCase(UserAlertRepository userAlertRepository) {
+        return new SendToUserInteractor(userAlertRepository);
+    }
+
+    @Bean
+    @Autowired
+    AlertCreationUseCase alertCreationUseCase(AlertRepository alertRepository, ObjectMapper objectMapper, SendToUserUseCase sendToUserUseCase) {
+        return new AlertCreationInteractor(alertRepository, objectMapper, sendToUserUseCase);
     }
 
 }
