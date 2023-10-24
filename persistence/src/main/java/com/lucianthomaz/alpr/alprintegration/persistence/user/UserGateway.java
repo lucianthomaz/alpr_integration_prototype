@@ -5,6 +5,8 @@ import com.lucianthomaz.alpr.alprintegration.domain.User;
 import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.UserRepository;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 public class UserGateway implements UserRepository {
     private final UserJpaRepository userJpaRepository;
@@ -22,4 +24,12 @@ public class UserGateway implements UserRepository {
         PersistentUser persistentUser = userJpaRepository.getReferenceById(id);
         return objectMapper.convertValue(persistentUser, User.class);
     }
+
+    @Override
+    public List<User> getUsers(List<Integer> ids) {
+        List<PersistentUser> persistentUsers = userJpaRepository.findAllById(ids);
+        return persistentUsers.stream().map(x -> objectMapper.convertValue(x, User.class)).toList();
+    }
+
+
 }

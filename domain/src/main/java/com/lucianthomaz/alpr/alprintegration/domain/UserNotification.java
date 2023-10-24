@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class User {
-    private int id;
+public class UserNotification {
     private String name;
     private String email;
-    private String username;
-    private String password;
+    private Boolean accepted;
 }

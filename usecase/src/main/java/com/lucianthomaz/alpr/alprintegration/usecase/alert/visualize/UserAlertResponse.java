@@ -1,18 +1,18 @@
-package com.lucianthomaz.alpr.alprintegration.domain;
+package com.lucianthomaz.alpr.alprintegration.usecase.alert.visualize;
 
+import com.lucianthomaz.alpr.alprintegration.domain.StatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class Alert {
+public class UserAlertResponse {
     private int id;
     private int locationId;
     private String licensePlate;
@@ -21,5 +21,5 @@ public class Alert {
     private String details;
     private StatusEnum status;
     private String pictureUrl;
-    private List<UserNotification> usersNotified;
+    private Boolean accepted;
 }

@@ -1,6 +1,9 @@
 package com.lucianthomaz.alpr.alprintegration.usecase.alert.create;
 
+import com.lucianthomaz.alpr.alprintegration.domain.UserNotification;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record AlertCreationResponse(int id,
                                     int locationId,
@@ -8,5 +11,6 @@ public record AlertCreationResponse(int id,
                                     int alertTypeId,
                                     LocalDateTime dateTime,
                                     String details,
-                                    String pictureUrl) {
+                                    String pictureUrl,
+                                    List<UserNotification> usersNotified) {
 }
