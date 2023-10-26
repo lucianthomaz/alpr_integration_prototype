@@ -2,15 +2,17 @@ package com.lucianthomaz.alpr.alprintegration.application.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.*;
-import com.lucianthomaz.alpr.alprintegration.interactor.alert.AlertCreationInteractor;
-import com.lucianthomaz.alpr.alprintegration.interactor.alert.SendToUserInteractor;
-import com.lucianthomaz.alpr.alprintegration.interactor.alert.VisualizeAlertsInteractor;
+import com.lucianthomaz.alpr.alprintegration.interactor.alert.create.AlertCreationInteractor;
+import com.lucianthomaz.alpr.alprintegration.interactor.alert.create.SendToUserInteractor;
+import com.lucianthomaz.alpr.alprintegration.interactor.alert.useralertaction.UserUserAlertActionInteractor;
+import com.lucianthomaz.alpr.alprintegration.interactor.alert.visualize.VisualizeAlertsInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.alerttype.AlertTypeCreationInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.location.LocationCreationInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.user.UserCreationInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.vehicle.VehicleCreationInteractor;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.create.AlertCreationUseCase;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.sendtouser.SendToUserUseCase;
+import com.lucianthomaz.alpr.alprintegration.usecase.alert.useralertaction.UserAlertActionUseCase;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.visualize.VisualizeAlertsUseCase;
 import com.lucianthomaz.alpr.alprintegration.usecase.alerttype.create.AlertTypeCreationUseCase;
 import com.lucianthomaz.alpr.alprintegration.usecase.location.create.LocationCreationUseCase;
@@ -64,6 +66,12 @@ public class InteractorConfiguration {
     @Autowired
     VisualizeAlertsUseCase visualizeAlertsUseCase(AlertRepository alertRepository, ObjectMapper objectMapper) {
         return new VisualizeAlertsInteractor(alertRepository, objectMapper);
+    }
+
+    @Bean
+    @Autowired
+    UserAlertActionUseCase userAlertActionUseCase(UserAlertRepository userAlertRepository, AlertRepository alertRepository, ObjectMapper objectMapper) {
+        return new UserUserAlertActionInteractor(userAlertRepository, alertRepository, objectMapper);
     }
 
 }

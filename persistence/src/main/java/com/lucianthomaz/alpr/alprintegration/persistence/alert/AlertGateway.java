@@ -7,6 +7,7 @@ import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.AlertRep
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 public class AlertGateway implements AlertRepository {
@@ -21,8 +22,9 @@ public class AlertGateway implements AlertRepository {
     }
 
     @Override
-    public Alert getDetails(int id) {
-        return null;
+    public Optional<Alert> getDetails(int id) {
+        Optional<PersistentAlert> persistentAlert = jpaRepository.findById(id);
+        return persistentAlert.map(x -> objectMapper.convertValue(x, Alert.class));
     }
 
     @Override

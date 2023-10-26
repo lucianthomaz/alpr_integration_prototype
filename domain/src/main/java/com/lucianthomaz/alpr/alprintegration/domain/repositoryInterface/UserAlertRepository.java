@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface UserAlertRepository {
     List<UserAlert> sendAlertToUsers(int alertId, List<Integer> usersId);
+
+    UserAlert userAlertAction(int alertId, int userId, boolean accept);
 }

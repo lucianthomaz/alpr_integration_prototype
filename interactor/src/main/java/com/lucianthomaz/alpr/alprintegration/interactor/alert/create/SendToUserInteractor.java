@@ -1,4 +1,4 @@
-package com.lucianthomaz.alpr.alprintegration.interactor.alert;
+package com.lucianthomaz.alpr.alprintegration.interactor.alert.create;
 
 import com.lucianthomaz.alpr.alprintegration.domain.UserAlert;
 import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.UserAlertRepository;

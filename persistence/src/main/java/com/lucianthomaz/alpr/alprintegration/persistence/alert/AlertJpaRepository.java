@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface AlertJpaRepository extends JpaRepository<PersistentAlert, Long> {
+public interface AlertJpaRepository extends JpaRepository<PersistentAlert, Integer> {
 
     @Query(value = """
             SELECT

@@ -1,9 +1,9 @@
-package com.lucianthomaz.alpr.alprintegration.interactor.alert;
+package com.lucianthomaz.alpr.alprintegration.interactor.alert.visualize;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lucianthomaz.alpr.alprintegration.domain.Alert;
 import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.AlertRepository;
-import com.lucianthomaz.alpr.alprintegration.usecase.alert.visualize.UserAlertResponse;
+import com.lucianthomaz.alpr.alprintegration.usecase.alert.shared.UserAlertResponse;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.visualize.VisualizeAlertsResponder;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.visualize.VisualizeAlertsResponse;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.visualize.VisualizeAlertsUseCase;

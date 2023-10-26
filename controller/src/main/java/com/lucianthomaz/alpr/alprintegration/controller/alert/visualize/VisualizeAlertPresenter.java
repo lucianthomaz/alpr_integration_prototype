@@ -2,6 +2,7 @@ package com.lucianthomaz.alpr.alprintegration.controller.alert.visualize;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lucianthomaz.alpr.alprintegration.controller.BasePresenter;
+import com.lucianthomaz.alpr.alprintegration.controller.alert.shared.UserAlertViewModel;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.visualize.VisualizeAlertsResponder;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.visualize.VisualizeAlertsResponse;
 import lombok.AllArgsConstructor;

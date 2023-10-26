@@ -1,4 +1,4 @@
-package com.lucianthomaz.alpr.alprintegration.controller.alert.visualize;
+package com.lucianthomaz.alpr.alprintegration.controller.alert.shared;
 
 import com.lucianthomaz.alpr.alprintegration.domain.StatusEnum;
 import lombok.AllArgsConstructor;

@@ -18,4 +18,12 @@ public class UserAlertGateway implements UserAlertRepository {
         persistentUserAlerts = jpaRepository.saveAll(persistentUserAlerts);
         return persistentUserAlerts.stream().map(x -> objectMapper.convertValue(x, UserAlert.class)).toList();
     }
+
+    @Override
+    public UserAlert userAlertAction(int alertId, int userId, boolean accept) {
+        PersistentUserAlert persistentUserAlert = PersistentUserAlert.builder()
+                .alertId(alertId).userId(userId).accepted(accept).build();
+        persistentUserAlert = jpaRepository.save(persistentUserAlert);
+        return objectMapper.convertValue(persistentUserAlert, UserAlert.class);
+    }
 }
