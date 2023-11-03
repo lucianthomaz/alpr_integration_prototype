@@ -10,16 +10,16 @@ public interface AlertJpaRepository extends JpaRepository<PersistentAlert, Integ
     @Query(value = """
             SELECT
             AL.id,
-            AL.location_id,
-            AL.license_plate,
-            AL.alert_type_id,
-            AL.date_time,
+            AL.location_id as locationId,
+            AL.license_plate as licensePlate,
+            AL.alert_type_id as alertTypeId,
+            AL.date_time as dateTime,
             AL.details,
             AL.status,
-            AL.picture_url,
+            AL.picture_url as pictureUrl,
             U.name,
             U.email,
-            UA.Accepted
+            UA.Accepted as accepted
             FROM
             alert AL
             LEFT JOIN user_alert UA ON
@@ -28,5 +28,5 @@ public interface AlertJpaRepository extends JpaRepository<PersistentAlert, Integ
             WHERE
             UA.USER_ID = ?1
             """, nativeQuery = true)
-    List<PersistentAlertWithUsersAcceptance> findAllByUserId(int userId);
+    List<AlertProjection> findAllByUserId(int userId);
 }

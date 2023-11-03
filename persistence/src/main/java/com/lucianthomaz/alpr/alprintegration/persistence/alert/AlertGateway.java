@@ -29,7 +29,7 @@ public class AlertGateway implements AlertRepository {
 
     @Override
     public List<Alert> getAlertsByUserId(int userId) {
-        List<PersistentAlertWithUsersAcceptance> persistentAlerts = jpaRepository.findAllByUserId(userId);
+        List<AlertProjection> persistentAlerts = jpaRepository.findAllByUserId(userId);
         return persistentAlerts.stream().map(pa -> {
             Alert al = objectMapper.convertValue(pa, Alert.class);
             al.setUsersNotified(List.of(UserNotification.builder().name(pa.getName()).email(pa.getEmail())

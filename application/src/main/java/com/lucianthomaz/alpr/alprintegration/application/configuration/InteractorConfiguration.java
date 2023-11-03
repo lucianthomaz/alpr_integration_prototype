@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.*;
 import com.lucianthomaz.alpr.alprintegration.interactor.alert.create.AlertCreationInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.alert.create.SendToUserInteractor;
-import com.lucianthomaz.alpr.alprintegration.interactor.alert.useralertaction.UserUserAlertActionInteractor;
+import com.lucianthomaz.alpr.alprintegration.interactor.alert.useralertaction.UserAlertActionInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.alert.visualize.VisualizeAlertsInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.alerttype.AlertTypeCreationInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.location.LocationCreationInteractor;
@@ -71,7 +71,7 @@ public class InteractorConfiguration {
     @Bean
     @Autowired
     UserAlertActionUseCase userAlertActionUseCase(UserAlertRepository userAlertRepository, AlertRepository alertRepository, ObjectMapper objectMapper) {
-        return new UserUserAlertActionInteractor(userAlertRepository, alertRepository, objectMapper);
+        return new UserAlertActionInteractor(userAlertRepository, alertRepository, objectMapper);
     }
 
 }

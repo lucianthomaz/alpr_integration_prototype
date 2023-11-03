@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
 import java.util.Optional;
 
 @AllArgsConstructor
-public class UserUserAlertActionInteractor implements UserAlertActionUseCase {
+public class UserAlertActionInteractor implements UserAlertActionUseCase {
     private final UserAlertRepository userAlertRepository;
     private final AlertRepository alertRepository;
     private final ObjectMapper objectMapper;
