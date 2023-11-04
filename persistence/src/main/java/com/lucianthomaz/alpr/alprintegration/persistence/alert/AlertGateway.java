@@ -15,7 +15,7 @@ public class AlertGateway implements AlertRepository {
     private final ObjectMapper objectMapper;
 
     @Override
-    public Alert create(Alert alert) {
+    public Alert save(Alert alert) {
         PersistentAlert persistentAlert = objectMapper.convertValue(alert, PersistentAlert.class);
         persistentAlert = jpaRepository.save(persistentAlert);
         return objectMapper.convertValue(persistentAlert, Alert.class);
@@ -33,8 +33,12 @@ public class AlertGateway implements AlertRepository {
         return persistentAlerts.stream().map(pa -> {
             Alert al = objectMapper.convertValue(pa, Alert.class);
             al.setUsersNotified(List.of(UserNotification.builder().name(pa.getName()).email(pa.getEmail())
-                    .accepted(pa.getAccepted()).build()));
+                    .accepted(toBoolean(pa.getAccepted())).build()));
             return al;
         }).toList();
+    }
+
+    public static Boolean toBoolean(Byte b) {
+        return b == null ? null : b != 0;
     }
 }

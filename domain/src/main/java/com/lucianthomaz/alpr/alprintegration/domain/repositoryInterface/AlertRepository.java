@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AlertRepository {
-    Alert create(Alert alert);
+    Alert save(Alert alert);
 
     Optional<Alert> getDetails(int id);
 

@@ -26,8 +26,8 @@ public class AlertCreationInteractor implements AlertCreationUseCase {
     public void execute(AlertCreationRequest request, AlertCreationResponder responder) {
         Alert alert = objectMapper.convertValue(request, Alert.class);
         alert.setDateTime(LocalDateTime.now());
-        alert.setStatus(StatusEnum.CREATED);
-        alert = alertRepository.create(alert);
+        alert.setStatus(StatusEnum.CREATED.name());
+        alert = alertRepository.save(alert);
         List<UserAlert> userAlerts = sendToUserUseCase.execute(new SendToUserRequest(alert.getId(), List.of(1, 2), null));
         List<User> usersNotified = userRepository.getUsers(userAlerts.stream().map(UserAlert::getUserId).toList());
         List<UserNotification> userNotifications = usersNotified.stream().map(user -> UserNotification.builder()

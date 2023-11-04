@@ -13,5 +13,5 @@ public interface AlertProjection {
     String getPictureUrl();
     String getName();
     String getEmail();
-    Boolean getAccepted();
+    Byte getAccepted();
 }
