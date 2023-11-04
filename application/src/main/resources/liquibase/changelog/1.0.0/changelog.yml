@@ -7,3 +7,11 @@ databaseChangeLog:
         - sqlFile:
             path: 001-tables-creation.sql
             relativeToChangelogFile: true
+  - changeSet:
+      id: '20231104-1800'
+      author: lucianthomaz
+      comment: "Add Sample Initial Database"
+      changes:
+        - sqlFile:
+            path: 002-tables-initial-sample-data.sql
+            relativeToChangelogFile: true
