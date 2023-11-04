@@ -17,7 +17,7 @@ public class UserAlertViewModel {
     private int locationId;
     private String licensePlate;
     private int alertTypeId;
-    private LocalDateTime dateTime;
+    private LocalDateTime creationDate;
     private String details;
     private StatusEnum status;
     private String pictureUrl;

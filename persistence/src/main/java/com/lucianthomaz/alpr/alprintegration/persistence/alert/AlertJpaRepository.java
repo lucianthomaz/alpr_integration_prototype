@@ -13,7 +13,7 @@ public interface AlertJpaRepository extends JpaRepository<PersistentAlert, Integ
             AL.location_id as locationId,
             AL.license_plate as licensePlate,
             AL.alert_type_id as alertTypeId,
-            AL.date_time as dateTime,
+            AL.creation_date as creationDate,
             AL.details,
             AL.status,
             AL.picture_url as pictureUrl,

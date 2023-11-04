@@ -11,6 +11,7 @@ import com.lucianthomaz.alpr.alprintegration.usecase.alert.useralertaction.UserA
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.useralertaction.UserAlertActionUseCase;
 import lombok.AllArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -24,8 +25,14 @@ public class UserAlertActionInteractor implements UserAlertActionUseCase {
         userAlertRepository.userAlertAction(request.alertId(), request.userId(), request.accepted());
         Optional<Alert> alert = alertRepository.getDetails(request.alertId());
         if (request.accepted()) {
-            alert.ifPresent(x -> x.setStatus(StatusEnum.ACCEPTED.name()));
-            alertRepository.save(alert.get());
+            if (alert.isPresent()) {
+                Alert a = alert.get();
+                a.setStatus(StatusEnum.ACCEPTED.name());
+                a.setLastModified(LocalDateTime.now());
+                a.setLastModifiedBy(request.userId());
+                alertRepository.save(a);
+            }
+
         }
         UserAlertResponse response = alert.map(x -> {
             UserAlertResponse alertResponse = objectMapper.convertValue(x, UserAlertResponse.class);

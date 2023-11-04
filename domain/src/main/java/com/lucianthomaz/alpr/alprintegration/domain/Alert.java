@@ -17,9 +17,11 @@ public class Alert {
     private int locationId;
     private String licensePlate;
     private int alertTypeId;
-    private LocalDateTime dateTime;
+    private LocalDateTime creationDate;
     private String details;
     private String status;
     private String pictureUrl;
+    private LocalDateTime lastModified;
+    private int lastModifiedBy;
     private List<UserNotification> usersNotified;
 }

@@ -7,7 +7,7 @@ public interface AlertProjection {
     Integer getLocationId();
     String getLicensePlate();
     Integer getAlertTypeId();
-    LocalDateTime getDateTime();
+    LocalDateTime getCreationDate();
     String getDetails();
     String getStatus();
     String getPictureUrl();

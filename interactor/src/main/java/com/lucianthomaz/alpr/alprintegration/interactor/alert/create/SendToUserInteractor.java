@@ -9,11 +9,13 @@ import com.lucianthomaz.alpr.alprintegration.usecase.alert.sendtouser.SendToUser
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.sendtouser.SendToUserUseCase;
 import lombok.AllArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
 public class SendToUserInteractor implements SendToUserUseCase {
+    private static final int SYSTEM = 1;
 
     private final UserAlertRepository repository;
     private final AlertRepository alertRepository;
@@ -23,6 +25,8 @@ public class SendToUserInteractor implements SendToUserUseCase {
         Optional<Alert> alert = alertRepository.getDetails(request.alertId());
         alert.ifPresent(x -> {
             x.setStatus(StatusEnum.USERS_NOTIFIED.name());
+            x.setLastModified(LocalDateTime.now());
+            x.setLastModifiedBy(SYSTEM);
             alertRepository.save(x);
         });
         return repository.sendAlertToUsers(request.alertId(), request.usersId());
