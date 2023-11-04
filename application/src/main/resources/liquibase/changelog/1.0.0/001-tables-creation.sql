@@ -6,13 +6,6 @@ CREATE TABLE `vehicle`
     PRIMARY KEY (`license_plate`)
 );
 
-CREATE TABLE `status`
-(
-    `id`     int NOT NULL AUTO_INCREMENT,
-    `status` varchar(50),
-    PRIMARY KEY (`id`)
-);
-
 CREATE TABLE `alert_type`
 (
     `id`          int NOT NULL AUTO_INCREMENT,
@@ -49,7 +42,7 @@ CREATE TABLE `alert`
     `alert_type_id` int,
     `date_time`     datetime,
     `details`       varchar(100),
-    `status`        int,
+    `status`        varchar(20),
     `picture_url`   varchar(2000),
     PRIMARY KEY (`id`),
     FOREIGN KEY (`location_id`) REFERENCES location(`id`),
