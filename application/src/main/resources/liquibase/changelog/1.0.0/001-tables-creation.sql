@@ -40,14 +40,17 @@ CREATE TABLE `alert`
     `location_id`   int,
     `license_plate` varchar(08),
     `alert_type_id` int,
-    `date_time`     datetime,
+    `creation_date` datetime,
     `details`       varchar(100),
     `status`        varchar(20),
     `picture_url`   varchar(2000),
+    `last_modified` datetime,
+    `last_modified_by` int,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`location_id`) REFERENCES location(`id`),
     FOREIGN KEY (`license_plate`) REFERENCES vehicle(`license_plate`),
-    FOREIGN KEY (`alert_type_id`) REFERENCES alert_type(`id`)
+    FOREIGN KEY (`alert_type_id`) REFERENCES alert_type(`id`),
+    FOREIGN KEY (`last_modified_by`) REFERENCES user(`id`)
 );
 
 CREATE TABLE `user_alert`
