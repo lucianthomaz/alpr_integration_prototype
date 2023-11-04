@@ -19,7 +19,7 @@ public class Alert {
     private int alertTypeId;
     private LocalDateTime dateTime;
     private String details;
-    private StatusEnum status;
+    private String status;
     private String pictureUrl;
     private List<UserNotification> usersNotified;
 }

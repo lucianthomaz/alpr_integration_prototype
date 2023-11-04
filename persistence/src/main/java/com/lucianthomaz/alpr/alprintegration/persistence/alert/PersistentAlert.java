@@ -24,6 +24,6 @@ public class PersistentAlert {
     private int alertTypeId;
     private LocalDateTime dateTime;
     private String details;
-    private StatusEnum status;
+    private String status;
     private String pictureUrl;
 }
