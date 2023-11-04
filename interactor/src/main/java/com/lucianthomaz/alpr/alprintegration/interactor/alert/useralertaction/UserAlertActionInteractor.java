@@ -2,6 +2,7 @@ package com.lucianthomaz.alpr.alprintegration.interactor.alert.useralertaction;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lucianthomaz.alpr.alprintegration.domain.Alert;
+import com.lucianthomaz.alpr.alprintegration.domain.StatusEnum;
 import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.AlertRepository;
 import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.UserAlertRepository;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.shared.UserAlertResponse;
@@ -22,6 +23,10 @@ public class UserAlertActionInteractor implements UserAlertActionUseCase {
     public void execute(UserAlertActionRequest request, UserAlertActionResponder responder) {
         userAlertRepository.userAlertAction(request.alertId(), request.userId(), request.accepted());
         Optional<Alert> alert = alertRepository.getDetails(request.alertId());
+        if (request.accepted()) {
+            alert.ifPresent(x -> x.setStatus(StatusEnum.ACCEPTED.name()));
+            alertRepository.save(alert.get());
+        }
         UserAlertResponse response = alert.map(x -> {
             UserAlertResponse alertResponse = objectMapper.convertValue(x, UserAlertResponse.class);
             alertResponse.setAccepted(request.accepted());
