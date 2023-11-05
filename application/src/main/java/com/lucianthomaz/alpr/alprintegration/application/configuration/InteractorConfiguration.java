@@ -2,6 +2,7 @@ package com.lucianthomaz.alpr.alprintegration.application.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.*;
+import com.lucianthomaz.alpr.alprintegration.interactor.alert.complete.AlertCompletionInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.alert.create.AlertCreationInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.alert.create.SendToUserInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.alert.useralertaction.UserAlertActionInteractor;
@@ -10,6 +11,7 @@ import com.lucianthomaz.alpr.alprintegration.interactor.alerttype.AlertTypeCreat
 import com.lucianthomaz.alpr.alprintegration.interactor.location.LocationCreationInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.user.UserCreationInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.vehicle.VehicleCreationInteractor;
+import com.lucianthomaz.alpr.alprintegration.usecase.alert.complete.AlertCompletionUseCase;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.create.AlertCreationUseCase;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.sendtouser.SendToUserUseCase;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.useralertaction.UserAlertActionUseCase;
@@ -72,6 +74,12 @@ public class InteractorConfiguration {
     @Autowired
     UserAlertActionUseCase userAlertActionUseCase(UserAlertRepository userAlertRepository, AlertRepository alertRepository, ObjectMapper objectMapper) {
         return new UserAlertActionInteractor(userAlertRepository, alertRepository, objectMapper);
+    }
+
+    @Bean
+    @Autowired
+    AlertCompletionUseCase alertCompletionUseCase(AlertRepository alertRepository, ObjectMapper objectMapper) {
+        return new AlertCompletionInteractor(alertRepository, objectMapper);
     }
 
 }
