@@ -27,7 +27,6 @@ test {
 }
 
 bootJar {
-//    baseName "alprintegration"
     manifest {
         attributes 'Start-Class': 'com.lucianthomaz.alpr.alprintegration.application.AlprIntegrationApplication'
     }

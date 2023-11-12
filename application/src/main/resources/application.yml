@@ -6,5 +6,5 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   liquibase:
     change-log: classpath:/liquibase/changelog/changelog-master.yml
-    application:
-      name: alprintegration
+  application:
+    name: alprintegration
