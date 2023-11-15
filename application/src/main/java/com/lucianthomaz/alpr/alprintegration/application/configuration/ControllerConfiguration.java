@@ -8,6 +8,7 @@ import com.lucianthomaz.alpr.alprintegration.controller.alert.getalertsbyuser.Ge
 import com.lucianthomaz.alpr.alprintegration.controller.alerttype.create.AlertTypeCreationController;
 import com.lucianthomaz.alpr.alprintegration.controller.location.create.LocationCreationController;
 import com.lucianthomaz.alpr.alprintegration.controller.user.create.UserCreationController;
+import com.lucianthomaz.alpr.alprintegration.controller.user.create.location.UserUpdateLocationController;
 import com.lucianthomaz.alpr.alprintegration.controller.vehicle.create.VehicleCreationController;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.complete.AlertCompletionUseCase;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.create.AlertCreationUseCase;
@@ -69,5 +70,10 @@ public class ControllerConfiguration {
     @Autowired
     AlertCompletionController alertCompletionController(AlertCompletionUseCase useCase, ObjectMapper objectMapper) {
         return new AlertCompletionController(useCase, objectMapper);
+    }
+
+    @Bean
+    UserUpdateLocationController userUpdateLocationController() {
+        return new UserUpdateLocationController();
     }
 }
