@@ -31,6 +31,10 @@ CREATE TABLE `user`
     `email`    varchar(100),
     `username` varchar(100),
     `password` varchar(100),
+    `last_known_latitude`  Decimal(8, 6),
+    `last_known_longitude` Decimal(9, 6),
+    `device_fcm_token` varchar(200),
+    `last_modified` datetime,
     PRIMARY KEY (`id`)
 );
 
