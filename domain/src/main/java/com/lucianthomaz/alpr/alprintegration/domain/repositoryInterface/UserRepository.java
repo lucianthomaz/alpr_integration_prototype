@@ -10,4 +10,8 @@ public interface UserRepository {
     User getUser(int id);
 
     List<User> getUsers(List<Integer> ids);
+
+    void updateFcmToken(int id, String fcmToken);
+
+    boolean authenticate(String username, String password);
 }

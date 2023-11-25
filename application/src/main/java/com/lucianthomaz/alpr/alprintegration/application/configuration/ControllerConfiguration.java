@@ -8,8 +8,11 @@ import com.lucianthomaz.alpr.alprintegration.controller.alert.getalertsbyuser.Ge
 import com.lucianthomaz.alpr.alprintegration.controller.alerttype.create.AlertTypeCreationController;
 import com.lucianthomaz.alpr.alprintegration.controller.location.create.LocationCreationController;
 import com.lucianthomaz.alpr.alprintegration.controller.user.create.UserCreationController;
-import com.lucianthomaz.alpr.alprintegration.controller.user.create.location.UserUpdateLocationController;
+import com.lucianthomaz.alpr.alprintegration.controller.user.location.UserUpdateLocationController;
+import com.lucianthomaz.alpr.alprintegration.controller.user.login.UserLoginController;
+import com.lucianthomaz.alpr.alprintegration.controller.user.updatefcmtoken.UpdateDeviceFcmTokenController;
 import com.lucianthomaz.alpr.alprintegration.controller.vehicle.create.VehicleCreationController;
+import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.UserRepository;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.complete.AlertCompletionUseCase;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.create.AlertCreationUseCase;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.useralertaction.UserAlertActionUseCase;
@@ -75,5 +78,14 @@ public class ControllerConfiguration {
     @Bean
     UserUpdateLocationController userUpdateLocationController() {
         return new UserUpdateLocationController();
+    }
+
+    @Bean
+    UpdateDeviceFcmTokenController updateDeviceFcmTokenController(UserRepository userRepository) {
+        return new UpdateDeviceFcmTokenController(userRepository);
+    }
+    @Bean
+    UserLoginController userLoginController(UserRepository userRepository) {
+        return new UserLoginController(userRepository);
     }
 }

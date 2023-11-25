@@ -20,4 +20,8 @@ public class PersistentUser {
     private String email;
     private String username;
     private String password;
+    private Float lastKnownLatitude;
+    private Float lastKnownLongitude;
+    private String lastModified;
+    private String deviceFcmToken;
 }
