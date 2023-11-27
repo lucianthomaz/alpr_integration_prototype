@@ -8,7 +8,6 @@ import com.lucianthomaz.alpr.alprintegration.usecase.alert.create.AlertCreationR
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.create.AlertCreationResponder;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.create.AlertCreationResponse;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.create.AlertCreationUseCase;
-import com.lucianthomaz.alpr.alprintegration.usecase.alert.sendtouser.SendToUserRequest;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.sendtouser.SendToUserUseCase;
 import lombok.AllArgsConstructor;
 
@@ -31,12 +30,24 @@ public class AlertCreationInteractor implements AlertCreationUseCase {
         alert.setLastModifiedBy(SYSTEM);
         alert.setLastModified(LocalDateTime.now());
         alert = alertRepository.save(alert);
-        List<UserAlert> userAlerts = sendToUserUseCase.execute(new SendToUserRequest(alert.getId(), List.of(2,3), null));
-        List<User> usersNotified = userRepository.getUsers(userAlerts.stream().map(UserAlert::getUserId).toList());
-        List<UserNotification> userNotifications = usersNotified.stream().map(user -> UserNotification.builder()
-                .name(user.getName()).email(user.getEmail()).build()).toList();
-        alert.setUsersNotified(userNotifications);
+        requestUpdatedUsersLocation();
+//        List<UserAlert> userAlerts = sendToUserUseCase.execute(new SendToUserRequest(alert.getId(), List.of(2,3), null));
+//        List<User> usersNotified = userRepository.getUsersById(userAlerts.stream().map(UserAlert::getUserId).toList());
+//        List<UserNotification> userNotifications = usersNotified.stream().map(user -> UserNotification.builder()
+//                .name(user.getName()).email(user.getEmail()).build()).toList();
+//        alert.setUsersNotified(userNotifications);
         AlertCreationResponse response = objectMapper.convertValue(alert, AlertCreationResponse.class);
         responder.onAccept(response);
+    }
+
+    private void requestUpdatedUsersLocation() {
+        List<User> users = userRepository.getUsers();
+        NotificationService notificationService = new NotificationService();
+        users.forEach(user -> {
+            notificationService.sendPushNotification(
+                    user.getDeviceFcmToken(),
+                    "Location Request",
+                    "Please, provide your current location");
+        });
     }
 }

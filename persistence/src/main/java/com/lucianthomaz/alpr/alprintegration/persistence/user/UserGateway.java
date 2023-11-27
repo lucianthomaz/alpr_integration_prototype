@@ -28,9 +28,15 @@ public class UserGateway implements UserRepository {
     }
 
     @Override
-    public List<User> getUsers(List<Integer> ids) {
+    public List<User> getUsersById(List<Integer> ids) {
         List<PersistentUser> persistentUsers = userJpaRepository.findAllById(ids);
         return persistentUsers.stream().map(x -> objectMapper.convertValue(x, User.class)).toList();
+    }
+
+    @Override
+    public List<User> getUsers() {
+        List<PersistentUser> persistentUsers = userJpaRepository.findAll();
+        return persistentUsers.stream().map(x -> objectMapper.convertValue(x, User.class)).filter(x -> x.getId()!=1).toList();
     }
 
     @Override

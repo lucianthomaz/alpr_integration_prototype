@@ -9,7 +9,9 @@ public interface UserRepository {
 
     User getUser(int id);
 
-    List<User> getUsers(List<Integer> ids);
+    List<User> getUsersById(List<Integer> ids);
+
+    List<User> getUsers();
 
     void updateFcmToken(int id, String fcmToken);
 
