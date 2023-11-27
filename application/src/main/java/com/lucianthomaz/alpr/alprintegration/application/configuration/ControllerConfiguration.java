@@ -76,8 +76,8 @@ public class ControllerConfiguration {
     }
 
     @Bean
-    UserUpdateLocationController userUpdateLocationController() {
-        return new UserUpdateLocationController();
+    UserUpdateLocationController userUpdateLocationController(UserRepository userRepository) {
+        return new UserUpdateLocationController(userRepository);
     }
 
     @Bean

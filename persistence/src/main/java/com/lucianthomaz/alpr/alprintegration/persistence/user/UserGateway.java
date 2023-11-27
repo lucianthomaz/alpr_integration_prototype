@@ -5,7 +5,6 @@ import com.lucianthomaz.alpr.alprintegration.domain.User;
 import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.UserRepository;
 import lombok.AllArgsConstructor;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,5 +51,14 @@ public class UserGateway implements UserRepository {
         return perstentUser.isPresent();
     }
 
+    @Override
+    public void updateLocation(String username, double latitude, double longitude) {
+        Optional<PersistentUser> persistentUser = userJpaRepository.findByUsername(username);
+        if (persistentUser.isPresent()) {
+            persistentUser.get().setLastKnownLatitude(latitude);
+            persistentUser.get().setLastKnownLongitude(longitude);
+            userJpaRepository.save(persistentUser.get());
+        }
+    }
 
 }

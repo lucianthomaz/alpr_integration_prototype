@@ -16,4 +16,6 @@ public interface UserRepository {
     void updateFcmToken(int id, String fcmToken);
 
     boolean authenticate(String username, String password);
+
+    void updateLocation(String username, double latitude, double longitude);
 }
