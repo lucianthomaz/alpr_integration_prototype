@@ -5,6 +5,7 @@ import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.*;
 import com.lucianthomaz.alpr.alprintegration.interactor.alert.complete.AlertCompletionInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.alert.create.AlertCreationInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.alert.create.SendToUserInteractor;
+import com.lucianthomaz.alpr.alprintegration.interactor.alert.monitor.NotificationMonitor;
 import com.lucianthomaz.alpr.alprintegration.interactor.alert.useralertaction.UserAlertActionInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.alert.getalertsbyuser.GetAlertsByUserInteractor;
 import com.lucianthomaz.alpr.alprintegration.interactor.alerttype.AlertTypeCreationInteractor;
@@ -53,15 +54,18 @@ public class InteractorConfiguration {
 
     @Bean
     @Autowired
-    SendToUserUseCase sendToUserUseCase(UserAlertRepository userAlertRepository, AlertRepository alertRepository) {
-        return new SendToUserInteractor(userAlertRepository, alertRepository);
+    SendToUserUseCase sendToUserUseCase(UserAlertRepository userAlertRepository,
+                                        AlertRepository alertRepository,
+                                        LocationRepository locationRepository,
+                                        UserRepository userRepository) {
+        return new SendToUserInteractor(userAlertRepository, alertRepository, locationRepository, userRepository);
     }
 
     @Bean
     @Autowired
     AlertCreationUseCase alertCreationUseCase(AlertRepository alertRepository, ObjectMapper objectMapper,
-                                              SendToUserUseCase sendToUserUseCase, UserRepository userRepository) {
-        return new AlertCreationInteractor(alertRepository, objectMapper, sendToUserUseCase, userRepository);
+                                              UserRepository userRepository) {
+        return new AlertCreationInteractor(alertRepository, objectMapper, userRepository);
     }
 
     @Bean
@@ -80,6 +84,11 @@ public class InteractorConfiguration {
     @Autowired
     AlertCompletionUseCase alertCompletionUseCase(AlertRepository alertRepository, ObjectMapper objectMapper) {
         return new AlertCompletionInteractor(alertRepository, objectMapper);
+    }
+
+    @Bean
+    NotificationMonitor notificationMonitor(AlertRepository alertRepository, SendToUserUseCase sendToUserUseCase) {
+        return new NotificationMonitor(alertRepository, sendToUserUseCase);
     }
 
 }

@@ -3,6 +3,7 @@ package com.lucianthomaz.alpr.alprintegration.persistence.alert;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface AlertJpaRepository extends JpaRepository<PersistentAlert, Integer> {
@@ -29,4 +30,6 @@ public interface AlertJpaRepository extends JpaRepository<PersistentAlert, Integ
             UA.USER_ID = ?1
             """, nativeQuery = true)
     List<AlertProjection> findAllByUserId(int userId);
+
+    List<PersistentAlert> findAllByCreationDateLessThanAndStatusEquals(LocalDateTime creationDate, String status);
 }

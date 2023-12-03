@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "user")
 @Data
@@ -22,6 +24,6 @@ public class PersistentUser {
     private String password;
     private Double lastKnownLatitude;
     private Double lastKnownLongitude;
-    private String lastModified;
+    private LocalDateTime lastModified;
     private String deviceFcmToken;
 }

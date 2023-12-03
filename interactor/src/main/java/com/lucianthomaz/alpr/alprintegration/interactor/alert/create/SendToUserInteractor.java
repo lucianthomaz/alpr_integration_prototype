@@ -1,15 +1,19 @@
 package com.lucianthomaz.alpr.alprintegration.interactor.alert.create;
 
-import com.lucianthomaz.alpr.alprintegration.domain.Alert;
-import com.lucianthomaz.alpr.alprintegration.domain.StatusEnum;
-import com.lucianthomaz.alpr.alprintegration.domain.UserAlert;
+import com.lucianthomaz.alpr.alprintegration.domain.*;
 import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.AlertRepository;
+import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.LocationRepository;
 import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.UserAlertRepository;
+import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.UserRepository;
+import com.lucianthomaz.alpr.alprintegration.interactor.alert.shared.LocationUtils;
+import com.lucianthomaz.alpr.alprintegration.interactor.alert.shared.NotificationService;
+import com.lucianthomaz.alpr.alprintegration.interactor.alert.shared.UserLocation;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.sendtouser.SendToUserRequest;
 import com.lucianthomaz.alpr.alprintegration.usecase.alert.sendtouser.SendToUserUseCase;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,16 +23,49 @@ public class SendToUserInteractor implements SendToUserUseCase {
 
     private final UserAlertRepository repository;
     private final AlertRepository alertRepository;
+    private final LocationRepository locationRepository;
+    private final UserRepository userRepository;
 
     @Override
     public List<UserAlert> execute(SendToUserRequest request) {
-        Optional<Alert> alert = alertRepository.getDetails(request.alertId());
-        alert.ifPresent(x -> {
-            x.setStatus(StatusEnum.USERS_NOTIFIED.name());
-            x.setLastModified(LocalDateTime.now());
-            x.setLastModifiedBy(SYSTEM);
-            alertRepository.save(x);
-        });
-        return repository.sendAlertToUsers(request.alertId(), request.usersId());
+        Optional<Alert> optionalAlert = alertRepository.getDetails(request.alertId());
+        if (optionalAlert.isPresent()){
+            Alert alert = optionalAlert.get();
+
+            Location location = locationRepository.getLocation(alert.getLocationId()).get();
+            List<User> usersWithUpdatedLocation = userRepository.getUsersWithUpdatedLocation();
+            List<UserLocation> usersLocation = usersWithUpdatedLocation.stream()
+                    .map(user -> new UserLocation(user.getId(), user.getLastKnownLatitude(), user.getLastKnownLongitude()))
+                    .toList();
+
+            Optional<User> optionalUser = usersWithUpdatedLocation.stream().filter(user ->
+                    user.getId() == LocationUtils.findClosestLocation(location, usersLocation).userId()).findFirst();
+
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+                String body = """
+                        {"message": "You are the closest user from a irregular vehicle",
+                        \t"latitude": "",
+                        \t"longitude": "",
+                        \t"address": "",
+                        \t"direction": ""
+                        }""";
+
+                NotificationService.sendPushNotification(
+                        user.getDeviceFcmToken(),
+                        "Irregular vehicle alert",
+                        body);
+
+                List<UserAlert> usersNotified = repository.sendAlertToUsers(request.alertId(), List.of(user.getId()));
+
+                alert.setStatus(StatusEnum.USERS_NOTIFIED.name());
+                alert.setLastModified(LocalDateTime.now());
+                alert.setLastModifiedBy(SYSTEM);
+                alertRepository.save(alert);
+                return usersNotified;
+            }
+
+        }
+        return new ArrayList<>();
     }
 }

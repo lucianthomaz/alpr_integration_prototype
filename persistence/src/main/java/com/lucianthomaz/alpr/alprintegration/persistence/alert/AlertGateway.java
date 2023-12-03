@@ -6,6 +6,7 @@ import com.lucianthomaz.alpr.alprintegration.domain.UserNotification;
 import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.AlertRepository;
 import lombok.AllArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +37,15 @@ public class AlertGateway implements AlertRepository {
                     .accepted(toBoolean(pa.getAccepted())).build()));
             return al;
         }).toList();
+    }
+
+    @Override
+    public List<Alert> getAlertsPendingToSendNotification() {
+        List<PersistentAlert> persistentAlerts = jpaRepository.findAllByCreationDateLessThanAndStatusEquals(
+                LocalDateTime.now(),
+                "CREATED"
+        );
+        return persistentAlerts.stream().map(x -> objectMapper.convertValue(x, Alert.class)).toList();
     }
 
     public static Boolean toBoolean(Byte b) {

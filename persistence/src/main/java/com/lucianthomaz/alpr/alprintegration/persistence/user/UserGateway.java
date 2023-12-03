@@ -5,6 +5,7 @@ import com.lucianthomaz.alpr.alprintegration.domain.User;
 import com.lucianthomaz.alpr.alprintegration.domain.repositoryInterface.UserRepository;
 import lombok.AllArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,8 +58,15 @@ public class UserGateway implements UserRepository {
         if (persistentUser.isPresent()) {
             persistentUser.get().setLastKnownLatitude(latitude);
             persistentUser.get().setLastKnownLongitude(longitude);
+            persistentUser.get().setLastModified(LocalDateTime.now());
             userJpaRepository.save(persistentUser.get());
         }
+    }
+
+    @Override
+    public List<User> getUsersWithUpdatedLocation() {
+        List<PersistentUser> persistentUsers = userJpaRepository.findByLastModifiedLessThan(LocalDateTime.now().minusSeconds(30));
+        return persistentUsers.stream().map(x -> objectMapper.convertValue(x, User.class)).filter(x -> x.getId()!=1).toList();
     }
 
 }

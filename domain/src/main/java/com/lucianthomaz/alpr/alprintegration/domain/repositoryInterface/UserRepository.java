@@ -18,4 +18,6 @@ public interface UserRepository {
     boolean authenticate(String username, String password);
 
     void updateLocation(String username, double latitude, double longitude);
+
+    List<User> getUsersWithUpdatedLocation();
 }

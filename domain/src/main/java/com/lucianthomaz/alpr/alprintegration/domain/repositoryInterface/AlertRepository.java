@@ -12,4 +12,6 @@ public interface AlertRepository {
 
     List<Alert> getAlertsByUserId(int userId);
 
+    List<Alert> getAlertsPendingToSendNotification();
+
 }
