@@ -45,11 +45,14 @@ public class SendToUserInteractor implements SendToUserUseCase {
                 User user = optionalUser.get();
                 String data = """
                         {"message": "You are the closest user from a detected irregular vehicle",
-                        \t"latitude": "",
-                        \t"longitude": "",
-                        \t"address": "",
-                        \t"direction": ""
-                        }""";
+                        \t"latitude": %f,
+                        \t"longitude": %f,
+                        \t"address": %s,
+                        \t"direction": %s
+                        }""".formatted(location.getLatitude(),
+                        location.getLongitude(),
+                        location.getAddress(),
+                        location.getDirection());
 
                 NotificationService.sendPushNotificationWithData(
                         user.getDeviceFcmToken(),
