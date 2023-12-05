@@ -4,5 +4,6 @@ public enum StatusEnum {
     CREATED,
     USERS_NOTIFIED,
     ACCEPTED,
+    REJECTED,
     FINISHED
 }

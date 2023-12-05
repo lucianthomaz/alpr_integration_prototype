@@ -24,15 +24,13 @@ public class UserAlertActionInteractor implements UserAlertActionUseCase {
     public void execute(UserAlertActionRequest request, UserAlertActionResponder responder) {
         userAlertRepository.userAlertAction(request.alertId(), request.userId(), request.accepted());
         Optional<Alert> alert = alertRepository.getDetails(request.alertId());
-        if (request.accepted()) {
-            if (alert.isPresent()) {
-                Alert a = alert.get();
-                a.setStatus(StatusEnum.ACCEPTED.name());
-                a.setLastModified(LocalDateTime.now());
-                a.setLastModifiedBy(request.userId());
-                alertRepository.save(a);
-            }
 
+        if (alert.isPresent()) {
+            Alert a = alert.get();
+            a.setStatus(request.accepted() ? StatusEnum.ACCEPTED.name() : StatusEnum.REJECTED.name());
+            a.setLastModified(LocalDateTime.now());
+            a.setLastModifiedBy(request.userId());
+            alertRepository.save(a);
         }
         UserAlertResponse response = alert.map(x -> {
             UserAlertResponse alertResponse = objectMapper.convertValue(x, UserAlertResponse.class);
