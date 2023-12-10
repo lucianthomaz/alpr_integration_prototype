@@ -49,12 +49,14 @@ public class SendToUserInteractor implements SendToUserUseCase {
                         \t"longitude": "%f",
                         \t"address": "%s",
                         \t"direction": "%s",
+                        \t"details": "%s",
                         \t"alertId": "%d",
                         \t"userId": "%d"
                         }""".formatted(location.getLatitude(),
                         location.getLongitude(),
                         location.getAddress(),
                         location.getDirection(),
+                        alert.getDetails(),
                         alert.getId(),
                         user.getId());
 
