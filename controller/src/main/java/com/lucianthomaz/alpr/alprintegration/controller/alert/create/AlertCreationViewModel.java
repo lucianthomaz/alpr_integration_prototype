@@ -9,7 +9,7 @@ public record AlertCreationViewModel(int id,
                                      int locationId,
                                      String licensePlate,
                                      int alertTypeId,
-                                     LocalDateTime dateTime,
+                                     LocalDateTime creationDate,
                                      String details,
                                      String pictureUrl,
                                      List<UserCreationViewModel> usersNotified) {
